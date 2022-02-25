@@ -1,4 +1,5 @@
 #/bin/bash
+set -ev
 
 # Prepare release
 git config user.name "GitHub Action"
