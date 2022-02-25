@@ -8,6 +8,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip release]')"
 
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +24,14 @@ jobs:
       run: echo "PREVIOUS_RELEASE_TAG=`git describe --abbrev=0`" >> $GITHUB_ENV
     - name: print local var
       run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
+    - name: Cache SBT
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.ivy2/cache
+          ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
     - name: prepare release
-      run: ./.github/script.sh
+      run: sbt -DcurrentVersion=${PREVIOUS_RELEASE_TAG} prepareRelease
     - name: after test
       run: ./.github/script2.sh
