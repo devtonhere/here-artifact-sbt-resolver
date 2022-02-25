@@ -21,5 +21,7 @@ jobs:
         distribution: 'adopt'
     - name: get previous version
       run: PREVIOUS_RELEASE_TAG=$(git describe --abbrev=0)
+    - name: print
+      run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
     - name: prepare release
       run: sbt -DcurrentVersion=${PREVIOUS_RELEASE_TAG} prepareRelease
