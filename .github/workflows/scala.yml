@@ -23,5 +23,7 @@ jobs:
       run: echo "PREVIOUS_RELEASE_TAG=`git describe --abbrev=0`" >> $GITHUB_ENV
     - name: print
       run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
+    - name: setup git config
+      run: git config user.name "GitHub CI" && git config user.email "no-reply@here.com"
     - name: prepare release
       run: sbt -DcurrentVersion=${PREVIOUS_RELEASE_TAG} prepareRelease
