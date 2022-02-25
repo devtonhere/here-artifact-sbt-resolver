@@ -1,0 +1,22 @@
+name: SBT CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+    - name: get previous version
+      run: PREVIOUS_RELEASE_TAG=$(git describe --abbrev=0)
+    - name: prepare release
+      run: sbt -DcurrentVersion=${PREVIOUS_RELEASE_TAG} prepareRelease
