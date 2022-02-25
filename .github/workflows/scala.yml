@@ -20,7 +20,7 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
     - name: get previous version
-      run: PREVIOUS_RELEASE_TAG=$(git describe --abbrev=0)
+      run: echo "PREVIOUS_RELEASE_TAG=`git describe --abbrev=0`" >> $GITHUB_ENV
     - name: print
       run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
     - name: prepare release
