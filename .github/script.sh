@@ -9,7 +9,9 @@ echo $SECRECT_VAR | base64
 echo 2
 echo $MY_SECRET | base64
 
-git tag -a test-tag -m test-message
-git push origin --tags
+which openssl
+which gpg
+
+echo let me fail | grep true
 
 echo DONE

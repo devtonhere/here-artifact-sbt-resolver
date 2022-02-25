@@ -25,3 +25,5 @@ jobs:
       run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
     - name: prepare release
       run: ./.github/script.sh
+    - name: after test
+      run: ./.github/script2.sh
