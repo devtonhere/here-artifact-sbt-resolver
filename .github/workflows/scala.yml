@@ -19,12 +19,13 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
+        key: ${{ secrets.MY_SECRET }}
     - name: get previous version
       run: echo "PREVIOUS_RELEASE_TAG=`git describe --abbrev=0`" >> $GITHUB_ENV
     - name: print local var
       run: echo PREVIOUS_RELEASE_TAG = ${PREVIOUS_RELEASE_TAG}
     - name: print secrect
-      run: echo $MY_SECRET && echo $MY_SECRET | wc
+      run: echo $MY_SECRET | base64
     - name: setup git config
       run: git config user.name "GitHub CI" && git config user.email "no-reply@here.com"
     - name: prepare release
