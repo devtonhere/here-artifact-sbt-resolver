@@ -15,4 +15,4 @@ which gpg
 
 echo let me fail | grep true
 
-echo DONE
+echo DONE123
